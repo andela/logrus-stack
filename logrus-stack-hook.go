@@ -45,14 +45,14 @@ func (hook LogrusStackHook) Levels() []logrus.Level {
 
 // Fire is called by logrus when something is logged.
 func (hook LogrusStackHook) Fire(entry *logrus.Entry) error {
-	var skipFrames int
-	if len(entry.Data) == 0 {
-		// When WithField(s) is not used, we have 8 logrus frames to skip.
-		skipFrames = 8
-	} else {
-		// When WithField(s) is used, we have 6 logrus frames to skip.
-		skipFrames = 6
-	}
+	skipFrames := 2
+	// if len(entry.Data) == 0 {
+	// 	// When WithField(s) is not used, we have 8 logrus frames to skip.
+	// 	skipFrames = 8
+	// } else {
+	// 	// When WithField(s) is used, we have 6 logrus frames to skip.
+	// 	skipFrames = 6
+	// }
 
 	var frames stack.Stack
 
@@ -63,7 +63,7 @@ func (hook LogrusStackHook) Fire(entry *logrus.Entry) error {
 	// certain hoops. e.g. http handler in a separate package.
 	// This is a workaround.
 	for _, frame := range _frames {
-		if !strings.Contains(frame.File, "github.com/sirupsen/logrus") {
+		if !strings.Contains(frame.File, "github.com/sirupsen/logrus") && !strings.Contains(frame.File, "github.com/andela/epic-logger-go/log.go") {
 			frames = append(frames, frame)
 		}
 	}
