@@ -14,7 +14,7 @@ There's not much to it. See usage and [GoDoc](https://godoc.org/github.com/Gurpa
 ## Usage
 
 ```bash
-$ go get github.com/Gurpartap/logrus-stack
+$ go get github.com/andela/logrus-stack
 ```
 
 ```go
@@ -38,7 +38,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/Gurpartap/logrus-stack"
+	"github.com/andela/logrus-stack"
 	"github.com/sirupsen/logrus"
 )
 
